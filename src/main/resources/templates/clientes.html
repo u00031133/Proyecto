@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de clientes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .grupo-06 {
+            float: right; /* Hace que el bloque se alinee hacia la derecha */
+        }
+         /* Estilo personalizado para el botón verde claro */
+        .btn-verde-claro {
+            background-color: #32CD32; /* Verde claro */
+            border-color: #32CD32;    /* Borde del mismo color */
+            color: white;            /* Texto blanco */
+        }
+        /* Evitar cambios de color al pasar el cursor */
+        .btn-verde-claro:hover,
+        .btn-verde-claro:focus,
+        .btn-verde-claro:active {
+            background-color: #32CD32; /* Mantener el color verde claro */
+            border-color: #32CD32;
+            color: white;
+             }
+        
+    </style>
+    
+</head>
+<body>
+    <div class="container mt-5">
+        
+         <div class="row align-items-center">
+            <!-- Columna para el título y los botones -->
+            <div class="col">
+                
+        <h1 class="mb-3">Listado de Clientes</h1>
+        <a href="/clientes/nuevo" class="btn btn-verde-claro">Agregar nuevo Cliente</a>
+        <a href="/clientes/reporte/pdf" class="btn btn-info me-2" target="_blank">PDF</a>
+        <a href="/clientes/reporte/excel" class="btn btn-info me-2" target="_blank">EXCEL</a>
+        
+          </div>
+            <!-- Cuadro azul alineado a la derecha -->
+            <div class="col-auto grupo-06">
+                <div class="bg-primary text-white py-2 px-3 rounded">Grupo 06</div>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Dni</th>
+                    <th>Direccion</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cliente : ${clientes}">
+                    <td th:text="${cliente.id}"></td>
+                    <td th:text="${cliente.nombre}"></td>
+                    <td th:text="${cliente.dni}"></td>                    
+                    <td th:text="${cliente.direccion}"></td>
+                    <td th:text="${cliente.estado}"></td>
+                    <td>
+                        <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn btn-warning">Editar</a>
+                        <a th:href="@{/clientes/eliminar/{id}(id=${cliente.id})}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
